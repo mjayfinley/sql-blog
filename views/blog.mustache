@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Blog Posts</title>
+  </head>
+  <body>
+
+  <div>
+    <a href='/posts'>View All Posts</a>
+    <h2>Make a Post</h2>
+    
+    <form action='/addPost' method='POST'>
+        <div><input type='text' name='title' placeholder='Title of Post'></div>
+        <div><textarea type='text' name='body' placeholder='Your Post'></textarea></div>
+        <div><input type='text' name='category' placeholder='Category'></div>
+        <div><input type='submit'></div>
+    </form>
+
+    <div>
+    <h2> Sort Posts</h2>
+
+        <ul>
+        {{#posts}}
+             <form action='/posts/{{category}}' method='GET'>
+            <input class='category' type='hidden' value='{{category}}'>
+            </form>
+            
+            <div id='categoryBtns'>
+            </div>
+
+        {{/posts}}
+        </ul>
+    </div>
+
+  </div>
+    <div>
+    <ul>
+    {{#posts}}
+        <li>
+            {{title}}
+            {{body}}
+            {{category}}
+
+            <form action='/deletePost' method="POST">
+                <input type='hidden' name='postId' value='{{id}}'>
+                <input type='submit' value='Delete Post'>
+            </form>
+            <a href='/updatePost/{{id}}'>Update Post</a>
+
+        </li>
+    {{/posts}}
+    </ul>
+    </div>
+  </body>
+  <script src="handlers.js"></script>
+</html>
